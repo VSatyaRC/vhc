@@ -41,13 +41,4 @@ public class HostWriter {
         return new HashMap<>();
     }
 
-    public void runScripts() {
-        try {
-            Runtime.getRuntime().exec(new String[]{vhWorkspace, "chmod +x", "script.sh"});
-            Runtime.getRuntime().exec(vhWorkspace + "./script.sh");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
 }
