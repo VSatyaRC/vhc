@@ -38,7 +38,11 @@ public class HostWriter {
     }
 
 
-    public Resource createVhFiles(Map<String, String> vhDetails) throws IOException {
+    public Resource getVhFiles() throws IOException {
+        return Util.zipFiles();
+    }
+
+    public Map<String, List<String>> createVhFiles(Map<String, String> vhDetails) throws IOException {
 
         List<String> outputFiles = new ArrayList<>();
         outputFiles.add(createFile("index.ftl", "index.html", vhDetails));
@@ -47,7 +51,7 @@ public class HostWriter {
         outputFiles.add(createFile("index.ftl", "index.html", vhDetails));
         Map<String, List<String>> files = new HashMap<>();
         files.put("files", outputFiles);
-        return Util.zipFiles();
+        return files;
     }
 
 }

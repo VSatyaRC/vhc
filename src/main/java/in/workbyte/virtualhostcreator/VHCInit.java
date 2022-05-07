@@ -20,6 +20,9 @@ public class VHCInit implements CommandLineRunner {
     @Value("${vhc.workspace}")
     String vhWorkspace;
 
+    @Value("${vhc.files}")
+    String vhFiles;
+
     Logger logger = Logger.getLogger("VHCInit");
 
 
@@ -34,8 +37,20 @@ public class VHCInit implements CommandLineRunner {
         }
     }
 
+    public void createZipDirectory() {
+        File vhcWorkspace = new File(vhFiles);
+        if (!vhcWorkspace.exists()) {
+            logger.log(Level.INFO, "Creating vhs workspace.");
+            String isCreated = Boolean.toString(vhcWorkspace.mkdir());
+            logger.log(Level.INFO, isCreated);
+        } else {
+            logger.log(Level.INFO, "Directory vhs exists.");
+        }
+    }
+
     @Override
     public void run(String... args) throws Exception {
         createWorkingDirectory();
+        createZipDirectory();
     }
 }

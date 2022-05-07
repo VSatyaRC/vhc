@@ -17,7 +17,8 @@ public class Util {
 
     public static Resource zipFiles() throws IOException {
         String sourceFile = System.getProperty("user.home") + "/vhc";
-        FileOutputStream fos = new FileOutputStream("vh.zip");
+        String zipFile = System.getProperty("user.home") + "/vhs/vh.zip";
+        FileOutputStream fos = new FileOutputStream(zipFile);
         ZipOutputStream zipOut = new ZipOutputStream(fos);
         File fileToZip = new File(sourceFile);
 
@@ -25,12 +26,12 @@ public class Util {
         zipOut.close();
         fos.close();
 
-        return resource();
+        return resource(zipFile);
     }
 
-    private static Resource resource() {
+    private static Resource resource(String zipFile) {
         try {
-            Path file = Paths.get("vh.zip");
+            Path file = Paths.get(zipFile);
             Resource resource = new UrlResource(file.toUri());
             if (resource.exists() || resource.isReadable()) {
                 return resource;
