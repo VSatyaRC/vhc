@@ -4,18 +4,16 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StreamUtils;
 
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
 
 @Service
 public class HostWriter {
@@ -40,7 +38,7 @@ public class HostWriter {
     }
 
 
-    public Map<String, List<String>> createVhFiles(Map<String, String> vhDetails) {
+    public Resource createVhFiles(Map<String, String> vhDetails) throws IOException {
 
         List<String> outputFiles = new ArrayList<>();
         outputFiles.add(createFile("index.ftl", "index.html", vhDetails));
@@ -49,7 +47,7 @@ public class HostWriter {
         outputFiles.add(createFile("index.ftl", "index.html", vhDetails));
         Map<String, List<String>> files = new HashMap<>();
         files.put("files", outputFiles);
-        return files;
+        return Util.zipFiles();
     }
 
 }
