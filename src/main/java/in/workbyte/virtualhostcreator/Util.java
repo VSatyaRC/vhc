@@ -10,14 +10,16 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 public class Util {
 
-    public static Resource zipFiles() throws IOException {
-        String sourceFile = System.getProperty("user.home") + "/vhc";
-        String zipFile = System.getProperty("user.home") + "/vhs/vh.zip";
+    //zip creation failed
+    public static Resource zipFiles(Map<String, String> domainName) throws IOException {
+        String sourceFile = System.getProperty("user.home") + "/vhc/" + domainName;
+        String zipFile = System.getProperty("user.home") + "/vhs/" + domainName + ".zip";
         FileOutputStream fos = new FileOutputStream(zipFile);
         ZipOutputStream zipOut = new ZipOutputStream(fos);
         File fileToZip = new File(sourceFile);
@@ -41,6 +43,7 @@ public class Util {
         }
         return null;
     }
+
 
     private static void zipFile(File fileToZip, String fileName, ZipOutputStream zipOut) throws IOException {
         if (fileToZip.isHidden()) {
