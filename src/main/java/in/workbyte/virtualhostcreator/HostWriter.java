@@ -29,9 +29,9 @@ public class HostWriter {
 
         try {
             File folder = new File(vhWorkspace + input.get("domainName"));
-            if(folder.mkdir()) System.out.println(folder.getName()+" folder created");;
+            if (folder.mkdir()) System.out.println(folder.getName() + " folder created");
             Template template = configuration.getTemplate(templateName);
-            Writer fileWriter = new FileWriter(vhWorkspace + input.get("domainName") + "/" + outputFile);
+            Writer fileWriter = new FileWriter(vhWorkspace + folder.getName() + "/" + outputFile);
             template.process(input, fileWriter);
             fileWriter.close();
             return outputFile;

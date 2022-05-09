@@ -16,10 +16,15 @@ import java.util.zip.ZipOutputStream;
 
 public class Util {
 
+
     //zip creation failed
     public static Resource zipFiles(Map<String, String> domainName) throws IOException {
-        String sourceFile = System.getProperty("user.home") + "/vhc/" + domainName;
-        String zipFile = System.getProperty("user.home") + "/vhs/" + domainName + ".zip";
+
+
+        String sourceFile = System.getProperty("user.home") + "/vhc/" + domainName.get("domainName");
+        System.out.println("Zipping: " + sourceFile);
+        String zipFile = System.getProperty("user.home") + "/vhc/" + domainName.get("domainName") + ".zip";
+        System.out.println("to: " + zipFile);
         FileOutputStream fos = new FileOutputStream(zipFile);
         ZipOutputStream zipOut = new ZipOutputStream(fos);
         File fileToZip = new File(sourceFile);

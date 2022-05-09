@@ -38,7 +38,7 @@ public class VHC_Controller {
         try {
             Resource vhzip = hostWriter.getVhFiles(domainName);
             HttpHeaders headers = new HttpHeaders();
-            headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=vh.zip");
+            headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + domainName.get("domainName") + ".zip");
 
             return ResponseEntity.ok()
                     .headers(headers)
